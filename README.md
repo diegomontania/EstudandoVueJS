@@ -1,18 +1,1 @@
-# vuejsfirstapp
-
-> meu primeiro projeto
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Primeiro projeto utilizando Vue.JS, para criação de uma simple page application (SPA). No curso da alura.com.
