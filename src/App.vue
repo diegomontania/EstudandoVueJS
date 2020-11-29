@@ -2,10 +2,14 @@
   <div class="corpo">
     <h1 class="centralizado">{{ titulo }}</h1>
 
+    <!-- input do usuário -->
+    <!-- $event.target.value pega o valor a cada vez que digita-->
+    <input type="search" class="filtro" v-on:input="filtro = $event.target.value" placeholder="filtre por parte do título">
+
     <!-- lista de imagens -->
     <ul class="lista-fotos">
       <!-- faz a iteracao (loop) entre as fotos e retorna uma id da foto-->
-      <li class="lista-fotos-item" v-for="foto of fotos" :key="foto"> 
+      <li class="lista-fotos-item" v-for="foto of fotosComFiltro" :key="foto"> 
           <meu-painel :titulo="foto.titulo">
             <img class="imagem-resposiva" :src="foto.url" :alt="foto.titulo">
           </meu-painel> 
@@ -30,8 +34,28 @@
     data(){
       return{
         titulo : "Aplicação Vue JS",
-        fotos : []
+        fotos : [],
+        filtro : ''
       }
+    },
+
+    computed:{
+        fotosComFiltro(){
+            // se o filtro for aplicado, mostre apenas as fotos procuradas
+            if(this.filtro)
+            {
+              // cria expressão regular que irá fazer a busca pelo conjunto de caracteres pesquisados
+              let exp = new RegExp(this.filtro.trim(), 'i');
+              
+              // retorna a foto utilizando .test do java script procurando pelo titulo da foto
+              return this.fotos.filter(foto => exp.test(foto.titulo));
+            }
+            else  //se nao, retorne todas as fotos
+            {
+              return this.fotos;
+            }
+        }
+
     },
 
     // funcao que é chamada assim que o componente é criado
@@ -68,4 +92,10 @@
   .imagem-resposiva{
     width: 100%;
   }
+
+  .filtro{
+    display: block;
+    width: 100%;
+  }
+
 </style>
