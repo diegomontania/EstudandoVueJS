@@ -4,14 +4,15 @@
 
     <!-- input do usuário -->
     <!-- $event.target.value pega o valor a cada vez que digita-->
-    <input type="search" class="filtro" v-on:input="filtro = $event.target.value" placeholder="filtre por parte do título">
+    <input type="search" class="filtro" @input="filtro = $event.target.value" placeholder="filtre por parte do título">
 
     <!-- lista de imagens -->
     <ul class="lista-fotos">
       <!-- faz a iteracao (loop) entre as fotos e retorna uma id da foto-->
       <li class="lista-fotos-item" v-for="foto of fotosComFiltro" :key="foto"> 
           <meu-painel :titulo="foto.titulo">
-            <img class="imagem-resposiva" :src="foto.url" :alt="foto.titulo">
+            <imagem-responsiva :url="foto.url" :titulo="foto.titulo"/>
+            <!-- <img class="imagem-resposiva" :src="foto.url" :alt="foto.titulo"> -->
           </meu-painel> 
       </li>
     </ul>
@@ -21,14 +22,16 @@
 
 <script>
 
-  // importando o painel criado
+  // importando componentes criados
   import Painel from './components/shared/painel/Painel.vue';
+  import ImagemResponsiva from './components/shared/img-responsiva/ImagemResponsiva.vue';
 
   export default {
 
     // cria uma chave de referencia para o componente criado, para poder utiliza-lo
     components : {
-      'meu-painel': Painel
+      'meu-painel': Painel,
+      'imagem-responsiva': ImagemResponsiva
     },
 
     data(){
@@ -87,15 +90,9 @@
   .lista-fotos .lista-fotos-item{
     display: inline-block;
   }
-  
-  /* ajustando imagens dentro do painel */
-  .imagem-resposiva{
-    width: 100%;
-  }
 
   .filtro{
     display: block;
     width: 100%;
   }
-
 </style>
